@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %} <title>PTSP - Post</title> {% endblock %}
+
+{% block content %}
+    <form action="{% url 'pts_pops_app:community_post' %}" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form | crispy}}
+        <button name="submit">
+            Submit
+        </button>
+    </form>
+{% endblock %}

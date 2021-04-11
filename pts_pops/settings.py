@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # My apps
     'pts_pops_app',
+    'crispy_forms',
 
     # Django default app
     'django.contrib.admin',
