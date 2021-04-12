@@ -7,6 +7,21 @@
         <a style='text-align:center; margin-left:650px;' href="{% url 'pts_pops_app:index' %}">
             PTS Popcorn!
         </a>
+        {% if user.is_authenticated %}
+            <span style="margin-left: 250px">
+                Welcome, {{ user }}!
+            </span>
+            <a style="text-align:right; margin-left: 10px" href="{% url 'users:logout' %}">
+                Log Out
+            </a>
+        {% else %}
+        <a style="text-align: right; margin-left:450px;" href="{% url 'users:register' %}">
+            Register
+        </a>
+        <a style="margin-left:50px;" href="{% url 'users:login' %}">
+            Login
+        </a>
+        {% endif %}
     </h1>
 </div>
 </html>

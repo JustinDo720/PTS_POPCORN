@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     # My apps
     'pts_pops_app',
     'crispy_forms',
+    'bootstrap4',
+    'users',
 
     # Django default app
     'django.contrib.admin',
@@ -128,3 +130,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Login and Logout
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'users:login'
+LOGOUT_REDIRECT_URL = '/'
