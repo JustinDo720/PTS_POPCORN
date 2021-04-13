@@ -6,5 +6,6 @@ app_name = 'users'
 urlpatterns = [
     # This will take care of logging in and out
     path('accounts/', include('django.contrib.auth.urls')),
-    path('register/', views.register, name='register')
+    path('register/', views.register, name='register'),
+    path('user_profile/<int:profile_id>', views.user_profile, name='user_profile'),
 ]

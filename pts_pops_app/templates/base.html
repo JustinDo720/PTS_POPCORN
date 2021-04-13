@@ -1,15 +1,19 @@
 <html lang="en">
 <div id="main-logo">
     <h1>
-        <a style='text-align:left' href="{% url 'pts_pops_app:community_page' %}">
+        <a style="text-align:left;" href="https://popup.doublegood.com/s/uh5jd708">
+            Buy Popcorn Here!
+        </a>
+        <a style='margin-left:80px;' href="{% url 'pts_pops_app:community_page' %}">
             Community Page
         </a>
-        <a style='text-align:center; margin-left:650px;' href="{% url 'pts_pops_app:index' %}">
+
+        <a style='text-align:center; margin-left:350px;' href="{% url 'pts_pops_app:index' %}">
             PTS Popcorn!
         </a>
         {% if user.is_authenticated %}
             <span style="margin-left: 250px">
-                Welcome, {{ user }}!
+                Welcome, <a href="{% url 'users:user_profile' user.id %}">{{ user }}!</a>
             </span>
             <a style="text-align:right; margin-left: 10px" href="{% url 'users:logout' %}">
                 Log Out

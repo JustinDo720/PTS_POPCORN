@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>
+        PTSP - {{ user_profile.user.username }}
+    </title>
+{% endblock title %}
+
+{% block content %}
+    <img src="/media/{{ user_profile.user_photo }}" alt="profile-picture">
+    <div id="user_information">
+        {% if user_profile.user_email %}
+            Email: {{ user_profile.user_email }}
+        {% endif %}
+        {% if user_profile.user_bio %}
+            User Bio:
+            <p>
+                {{ user_profile.user_bio }}
+            </p>
+        {% endif %}
+        {% if user_posts %}
+            <ul>
+                <li>
+                    {% if user_posts.picture %}
+                        <img src="/media/uploaded_img/{{ user_posts.picture }}" alt="post-picture"/>
+                    {% endif %}
+                    <h2>
+                        {{ user_posts }}
+                    </h2>
+                    <span>
+                        {{ post.date_of_entry | date:'M d, Y' }}
+                    </span>
+                </li>
+            </ul>
+
+        {% endif %}
+    </div>
+{% endblock %}

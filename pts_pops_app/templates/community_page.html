@@ -10,16 +10,18 @@
 
     </div>
     <div id="posts">
-        <ul>
+        <ul style="list-style-type: none;">
             {% for post in  all_posts %}
                 <li>
-                   <p>
+                   <img src="/media/{{ post.owner_profile.user_photo }}" alt="profile-picture">
+                   <h2>
                        {{ post }}
-                   </p>
+                   </h2>
                   <span>
-                      {{ post.date_of_entry }}
+                      {{ post.date_of_entry | date:'M d, Y' }}
                   </span>
                 </li>
+                <hr>
             {% endfor  %}
         </ul>
     </div>

@@ -23,6 +23,9 @@ def community_post(request):
         form = UserEntries(data=request.POST, files=request.FILES)
         if form.is_valid():
             new_comment = form.save(commit=False)
+            # Cannot assign "3": Post.Owner must be a User instance we can't use request.user.id
+            new_comment.owner = request.user # request.user is a User Instance
+            new_comment.owner_profile = request.user.profile
             new_comment.save()
             return redirect('pts_pops_app:community_page')
 
