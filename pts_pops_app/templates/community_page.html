@@ -13,13 +13,23 @@
         <ul style="list-style-type: none;">
             {% for post in  all_posts %}
                 <li>
+                    <h3>{{ post.owner.username }}</h3>
                    <img src="/media/{{ post.owner_profile.user_photo }}" alt="profile-picture">
+                    {% if post.picture  %}
+                        <img src="/media/{{ post.picture }}" alt="post-picture">
+
+                    {% endif %}
                    <h2>
                        {{ post }}
                    </h2>
                   <span>
                       {{ post.date_of_entry | date:'M d, Y' }}
                   </span>
+                    {% if user.id == post.owner.id  %}
+                      <a href="{% url 'pts_pops_app:edit_post' post.id %}">
+                          Edit Your Post
+                      </a>
+                    {% endif %}
                 </li>
                 <hr>
             {% endfor  %}

@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block content %}
-    <img src="/media/{{ user_profile.user_photo }}" alt="profile-picture">
+    <img style='text-align:center' src="/media/{{ user_profile.user_photo }}" alt="profile-picture">
     <div id="user_information">
         {% if user_profile.user_email %}
             Email: {{ user_profile.user_email }}
@@ -19,20 +19,26 @@
             </p>
         {% endif %}
         {% if user_posts %}
-            <ul>
-                <li>
-                    {% if user_posts.picture %}
-                        <img src="/media/uploaded_img/{{ user_posts.picture }}" alt="post-picture"/>
-                    {% endif %}
-                    <h2>
-                        {{ user_posts }}
-                    </h2>
-                    <span>
-                        {{ post.date_of_entry | date:'M d, Y' }}
-                    </span>
-                </li>
-            </ul>
+            {% for post in user_posts %}
+                <ul>
+                    <li>
+                        {% if post.picture %}
+                            <img src="/media/{{ post.picture }}" alt="post-picture"/>
+                        {% endif %}
+                        <h2>
+                            {{ post }}
+                        </h2>
+                        <span>
+                            {{ post.date_of_entry | date:'M d, Y' }}
+                        </span>
+                        <a href="{% url 'pts_pops_app:edit_post' post.id %}">Edit Post</a>
+                    </li>
+                </ul>
+            {% endfor %}
 
         {% endif %}
+        <a href="{% url 'users:edit_user_profile' user_profile.user.id %}">
+            Edit Profile
+        </a>
     </div>
 {% endblock %}

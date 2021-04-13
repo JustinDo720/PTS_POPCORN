@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UserEntries
+from .forms import UserEntries, EditUserEntries
 from .models import Post
 
 
@@ -31,3 +31,21 @@ def community_post(request):
 
     context = {'form':form}
     return render(request, 'community_post.html', context=context)
+
+
+def edit_post(request, post_id):
+    post_requested = Post.objects.get(id=post_id)
+    if request.method != 'POST':
+        form = EditUserEntries(instance=post_requested)
+    else:
+        form = EditUserEntries(instance=post_requested, data= request.POST, files= request.FILES)
+        if form.is_valid():
+            form.save()
+            # We will redirect them to user profile page. Maybe make a message that saids its been updated in community
+            return redirect('users:user_profile', profile_id= post_requested.owner.id)
+    context = {
+        'post_requested': post_requested,
+        'form': form
+    }
+
+    return render(request, 'edit_post.html', context)

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+    <title>
+        PTS - Edit {{ profile.user.username }}
+    </title>
+{% endblock title %}
+
+{% block content %}
+    <form action="{% url 'users:edit_user_profile' profile.user.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form photo_form %}
+    {% bootstrap_form username_form %}
+    {% bootstrap_form email_form  %}
+    {% bootstrap_form bio_form %}
+    {% buttons %}
+        <button name="submit">
+            Save Changes
+        </button>
+    {% endbuttons %}
+    </form>
+{% endblock %}

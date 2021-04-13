@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+    <title>
+        PTSP - Edit Post
+    </title>
+{% endblock title %}
+
+{% block content %}
+    <form method="post" action="{% url 'pts_pops_app:edit_post' post_requested.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button>
+                Submit
+            </button>
+        {% endbuttons %}
+    </form>
+
+{% endblock content %}
