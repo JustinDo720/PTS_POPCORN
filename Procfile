@@ -1,0 +1,1 @@
+web: gunicorn pts_pops.wsgi --log-file -
