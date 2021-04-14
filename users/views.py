@@ -22,7 +22,7 @@ def register(request):
 def user_profile(request, profile_id):
     # We are going to use profile to locate our user's info
     profile = Profile.objects.get(id=profile_id)
-    user_posts = profile.post_set.all()
+    user_posts = profile.post_set.order_by('-date_of_entry')
     print(profile.user.username)
     context = {
         'user_profile': profile,

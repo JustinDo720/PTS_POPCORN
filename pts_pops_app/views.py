@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import UserEntries, EditUserEntries, AnonymousEntries
-from .models import Post, AnonymousPost
+from .forms import UserEntries, EditUserEntries, AnonymousEntries, FeedbackForm
+from .models import Post
 from django.core.paginator import Paginator
 from itertools import chain
 
@@ -10,36 +10,39 @@ def index(request):
 
 def community_page(request):
     if request.method != 'POST':
-        a_form = AnonymousEntries()
-        s_form = UserEntries()
+        if request.user.is_authenticated:
+            form = UserEntries()
+        else:
+            form = AnonymousEntries()
     else:
-        a_form = AnonymousEntries(data=request.POST, files=request.FILES)
-        s_form = UserEntries(data=request.POST, files=request.FILES)
-        if a_form.is_valid() & s_form.is_valid():
-            # This is an anonymous user. We let the registered user with some benefits :)
-            a_new_comment = a_form.save(commit=True)
-            s_new_comment = s_form.save(commit=False)
-            s_new_comment.owner = request.user
-            s_new_comment.owner_profile = request.user.profile
-            a_new_comment.save()
-            s_new_comment.save()
-            return redirect('pts_pops_app:community_page')
+        if request.user.is_authenticated:
+            form = UserEntries(data=request.POST, files=request.FILES)
+            if form.is_valid():
+                s_new_comment = form.save(commit=False)
+                s_new_comment.owner = request.user
+                s_new_comment.owner_profile = request.user.profile
+                s_new_comment.save()
+                return redirect('pts_pops_app:community_page')
+        else:
+            form = AnonymousEntries(data=request.POST, files=request.FILES)
+            if form.is_valid():
+                a_new_comment = form.save(commit=True)
+                a_new_comment.owner = None
+                a_new_comment.owner_profile = None
+                a_new_comment.save()
+                return redirect('pts_pops_app:community_page')
 
-    # Query all posts
+        # Query all posts
     all_posts = Post.objects.order_by('-date_of_entry')
-    anonymous_posts = AnonymousPost.objects.order_by('-date_of_entry')
-    combined_posts = list(chain(all_posts, anonymous_posts))
 
-    paginator = Paginator(combined_posts, 3)
-    print(combined_posts)
-    page_number = request.GET.get('page',1 )
+    paginator = Paginator(all_posts, 3)
+    page_number = request.GET.get('page', 1)
 
     all_posts = paginator.get_page(page_number)
 
-
-
-    context = {'all_posts':all_posts, 'a_form': a_form, 's_form': s_form}
+    context = {'all_posts': all_posts, 'form':form}
     return render(request, 'community_page.html', context=context)
+
 
 def community_post(request):
     # We are going to use UserEntries form to allow our users to post on the community page
@@ -82,3 +85,19 @@ def remove_post(request, post_id):
     post_to_delete = Post.objects.get(id=post_id)
     post_to_delete.delete()
     return redirect('users:user_profile', post_to_delete.owner_profile.user.id)
+
+
+def submit_feedback(request):
+    if request.method != 'POST':
+        form = FeedbackForm()
+    else:
+        form = FeedbackForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('pts_pops_app:index')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'submit_feedback.html', context=context)

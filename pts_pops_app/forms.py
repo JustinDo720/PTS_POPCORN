@@ -1,4 +1,4 @@
-from .models import Post, AnonymousPost
+from .models import Post, Feedback
 from django import forms
 
 class UserEntries(forms.ModelForm):
@@ -19,7 +19,17 @@ class EditUserEntries(forms.ModelForm):
 
 class AnonymousEntries(forms.ModelForm):
     class Meta:
-        model = AnonymousPost
+        model=Post
         fields = ['comments', 'picture']
         labels = {'comments': 'Please share your thoughts!', 'picture': 'Upload photos of your popcorn!'}
         widgets = {'comments': forms.Textarea(attrs={'cols':80})}
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['opinions', 'good', 'name']
+        labels = {'opinions': 'What should I do differently? Any general things that I should improve on? (besides designing)',
+                  'good': "What do you think?",
+                  'name': "You do not have to share your name if you don't want to"
+                  }

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}
+    <title>
+          PTSP - Feedback
+    </title>
+{% endblock title %}
+
+{% block content %}
+    <div class="card text-white bg-primary mb-3 mx-auto" style="max-width: 38rem; margin-top:15px;">
+  <div class="card-header mx-auto">Time To Roast Justin</div>
+  <div class="card-body">
+    <h5 class="card-title">Feedback Time!</h5>
+    <p class="card-text">
+        <form action="{% url 'pts_pops_app:submit_feedback' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <div style="margin-top: 15px; margin-left:261px;">
+                        <button name="submit">
+                            Submit
+                        </button>
+                    </div>
+                {% endbuttons %}
+        </form>
+    </p>
+  </div>
+</div>
+{% endblock content %}
