@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$-(z7f2f-z8poq%_bj616um1j^g6*q8b6-b3dy$)g$xo^n3n9q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*', 'localhost']
 
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'bootstrap4',
     'users',
-    'storages',
+
 
     # Django default app
     'django.contrib.admin',
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -130,10 +131,7 @@ USE_TZ = True
 # Static files
 
 STATIC_URL='/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
- os.path.join(BASE_DIR, "/static/"),
-]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -158,10 +156,10 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_REGION_NAME = 'us-east-1'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'    # Static Files
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'   # Media Files
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' # Upload media files to S3 set
 
 
 # Debug Settings

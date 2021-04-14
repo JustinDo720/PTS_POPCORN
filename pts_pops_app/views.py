@@ -3,6 +3,7 @@ from .forms import UserEntries, EditUserEntries, AnonymousEntries, FeedbackForm
 from .models import Post
 from django.core.paginator import Paginator
 from itertools import chain
+from django.http import Http404
 
 # Create your views here.
 def index(request):
@@ -65,6 +66,10 @@ def community_post(request):
 
 def edit_post(request, post_id):
     post_requested = Post.objects.get(id=post_id)
+
+    if post_requested.owner != request.user:
+        raise Http404
+
     if request.method != 'POST':
         form = EditUserEntries(instance=post_requested)
     else:
@@ -83,6 +88,10 @@ def edit_post(request, post_id):
 
 def remove_post(request, post_id):
     post_to_delete = Post.objects.get(id=post_id)
+
+    if post_to_delete.owner != request.user:
+        raise Http404
+
     post_to_delete.delete()
     return redirect('users:user_profile', post_to_delete.owner_profile.user.id)
 
