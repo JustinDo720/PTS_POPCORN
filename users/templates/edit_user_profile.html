@@ -8,16 +8,24 @@
 {% endblock title %}
 
 {% block content %}
-    <form action="{% url 'users:edit_user_profile' profile.user.id %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form photo_form %}
-    {% bootstrap_form username_form %}
-    {% bootstrap_form email_form  %}
-    {% bootstrap_form bio_form %}
-    {% buttons %}
-        <button name="submit">
-            Save Changes
-        </button>
-    {% endbuttons %}
-    </form>
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 40rem; margin-top: 15px;">
+        <div class="card-header" style="text-align:center;">Edit Your Post</div>
+        <div class="card-body">
+            <form action="{% url 'users:edit_user_profile' profile.user.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form photo_form %}
+                {% bootstrap_form username_form %}
+                {% bootstrap_form email_form  %}
+                {% bootstrap_form bio_form %}
+                <div style="margin-top: 15px;">
+                    {% buttons %}
+                        <button name="submit" style="margin-left:270px">
+                            Save Changes
+                        </button>
+                    {% endbuttons %}
+                </div>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}

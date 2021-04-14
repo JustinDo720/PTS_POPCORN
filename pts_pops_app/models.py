@@ -25,3 +25,11 @@ class Post(models.Model):
         return f'{self.comments}'
 
 
+# We are going to use this class for users who dont need to sign in
+class AnonymousPost(models.Model):
+    comments = models.TextField()
+    date_of_entry = models.DateTimeField(auto_now_add=True)
+    picture = models.ImageField(default=None, upload_to='uploaded_img/', blank=True)
+
+    def __str__(self):
+        return f'{self.comments}'

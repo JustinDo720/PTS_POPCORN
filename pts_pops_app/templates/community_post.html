@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
-{% load crispy_forms_filters %}
+{% load bootstrap5 %}
 {% block title %} <title>PTSP - Post</title> {% endblock %}
 
 {% block content %}
-    <form action="{% url 'pts_pops_app:community_post' %}" enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        {{ form | crispy}}
-        <button name="submit">
-            Submit
-        </button>
-    </form>
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 40rem; margin-top:15px;">
+          <div class="card-header" style="text-align:center">Share Your Thoughts</div>
+          <div class="card-body">
+            <form action="{% url 'pts_pops_app:community_post' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <div style="margin-top: 15px;">
+                            <button name="submit"
+                            style="margin-left:270px">
+                                Submit
+                            </button>
+                        </div>
+                    {% endbuttons %}
+            </form>
+          </div>
+    </div>
+
 {% endblock %}

@@ -1,15 +1,78 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 {% block title %}
     <title>PTSP - Community </title>
 {% endblock %}
 
 {% block content %}
-    <h1 style="text-align:center">Welcome to the Community page!</h1>
+    {% if user.is_authenticated %}
+        <div class="card text-center mx-auto" style="width: 40rem;">
+          <div class="card-body">
+            <h5 class="card-title">What would you like to share?</h5>
+            <p class="card-text">Thank you for signing up and logging in {{ user.username | title }}!!! This
+            share method is ONLY exclusive for users who signed up :)</p>
+              <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Start Sharing
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">What would you like to share today?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{% url 'pts_pops_app:community_page' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form s_form %}
+                            {% buttons %}
+                                <div style="margin-top: 15px;">
+                                    <button name="submit">
+                                        Share
+                                    </button>
+                                </div>
+                            {% endbuttons %}
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+    {% else %}
+        <div id="user-posting">
+        <div class="card mx-auto" style="width:68rem; margin-top:15px; margin-bottom:15px;">
+              <div class="card-header">
+                Hello there! You are posting as an Anonymous User! Please consider signing in or registering.
+              </div>
+          <div class="card-body">
+            <form action="{% url 'pts_pops_app:community_page' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form a_form %}
+                {% buttons %}
+                    <div style="margin-top: 15px;">
+                        <button name="submit"
+                        style="margin-left:500px">
+                            Share
+                        </button>
+                    </div>
+                {% endbuttons %}
+        </form>
+          </div>
+        </div>
+    </div>
+    {% endif %}
     <div>
         {% for post in  all_posts %}
             {% if post.picture %}
-                <div class="card mb-3 mx-auto" style="max-width: 760px; max-height: 300px">
+                <div class="card mb-3 mx-auto" style="max-width: 760px; max-height: 300px; margin-top:15px;">
                   <div class="row g-0">
                     <div class="col-md-4">
                       <img src="/media/{{ post.picture }}" alt="post-photo"
@@ -17,30 +80,50 @@
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
+                        {% if post.owner_profile %}
                         <img class="card-title" src='/media/{{ post.owner_profile.user_photo }}'
                             style="width:50px; height:50px"/>
+                        {% else %}
+                        <img class="card-title" src='/media/default_profile_pic.jpg'
+                        style="width:50px; height:50px"/>
+                        {% endif %}
                         <p class="card-text">
                             {{ post.comments | truncatechars:450| linebreaksbr }}
                             {% if post|wordcount > 300 %}
                                 <a href="#">See More</a>
                             {% endif %}
                         </p>
+                      {% if post.owner_profile %}
                         <p class="card-text text-end">
                             <small class="text-muted" >
                                 Written By: <a href="{% url 'users:user_profile' post.owner.id %}">{{ post.owner.username }}
                             </a> on {{ post.date_of_entry | date:'M d, Y'}}
                             </small>
                         </p>
+                      {% else %}
+                          <p class="card-text text-end">
+                            <small class="text-muted" >
+                                Written By: Anonymous on {{ post.date_of_entry | date:'M d, Y'}}
+                            </small>
+                        </p>
+                      {% endif %}
                       </div>
                     </div>
                   </div>
                 </div>
             {% else %}
                 <div class="card text-center mx-auto" style="max-width: 760px; max-height: 300px; margin-bottom:15px;">
-                  <div class="card-header">
-                    <img class="card-title" src='/media/{{ post.owner_profile.user_photo }}'
-                            style="width:50px; height:50px" alt="profile-picture"/>
-                  </div>
+                 {% if post.owner_profile %}
+                      <div class="card-header">
+                        <img class="card-title" src='/media/{{ post.owner_profile.user_photo }}'
+                                style="width:50px; height:50px" alt="profile-picture"/>
+                      </div>
+                 {% else %}
+                     <div class="card-header">
+                        <img class="card-title" src='/media/default_profile_pic.jpg'
+                                style="width:50px; height:50px" alt="profile-picture"/>
+                      </div>
+                 {% endif %}
                   <div class="card-body">
                     <p class="card-text">
                         {{ post.comments | truncatechars:450| linebreaksbr }}
@@ -49,10 +132,16 @@
                             {% endif %}
                     </p>
                   </div>
+                 {% if post.owner_profile %}
                   <div class="card-footer text-muted">
                       Written By: <a href="{% url 'users:user_profile' post.owner.id %}">{{ post.owner.username }}</a>
                       on {{ post.date_of_entry | date:'M d, Y'}}
                   </div>
+                 {% else %}
+                      <div class="card-footer text-muted">
+                      Written By Anonymous on {{ post.date_of_entry | date:'M d, Y'}}
+                      </div>
+                 {% endif %}
                 </div>
             {% endif %}
         {% endfor  %}
@@ -63,14 +152,16 @@
               {% if all_posts.has_previous %}
                 <li class="page-item"><a
                         href="{% url 'pts_pops_app:community_page' %}?page={{ all_posts.previous_page_number }}"
-                        class="btn btn-primary mx-auto">
+                        class="btn btn-primary"
+                        style="margin-left:540px;">
                             Previous Page
                 </a></li>
               {% endif %}
               {% if all_posts.has_next %}
                   <li class="page-item"><a
                           href="{% url 'pts_pops_app:community_page' %}?page={{ all_posts.next_page_number }}"
-                          class="btn btn-primary">
+                          class="btn btn-primary"
+                          style="margin-left: 1270px;">
                             Next Page
                 </a></li>
               {% endif %}

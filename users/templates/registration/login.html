@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
 
 {% block title %}<title>PTSP - Login</title>{% endblock %}
 
 {% block content %}
-    <form action="{% url 'users:login' %}" method="post" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button name="submit">
-                Submit
-            </button>
-            <!-- After using the default login view function it will redirect someone to profile but we override that-->
-            <!-- Alternatively we could just LOGIN_REDIRECT_URL = '/' in settings -->
-            <input type="hidden" value="{% url 'pts_pops_app:index' %}" name="next"/>
+    <div class="card text-white mb-3 mx-auto" style="max-width: 40rem; background-color: #a50527; margin-top:100px;">
+      <div class="card-header mx-auto">
+          <img src="{% static 'img/pts1.png' %}" class='rounded-3 rounded img-thumbnail' alt="pts-logo"
+          style="width:75px; height:75px;"> PTS POPCORN!
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center">LOGIN</h5>
+        <form action="{% url 'users:login' %}" method="post" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <div style="margin-top: 15px;">
+                    <button name="submit"
+                    style="margin-left:270px">
+                        Log In
+                    </button>
+                </div>
+            {% endbuttons %}
+        </form>
+      </div>
+    </div>
 
-        {% endbuttons %}
-    </form>
 {% endblock %}

@@ -24,17 +24,14 @@
                         {% endif %}
                     </p>
                     <span>
-                        {{ post.date_of_entry | date:'M d, Y' }}
+                       Written on {{ post.date_of_entry | date:'M d, Y' }}
                     </span>
                     {% if request.user.id == post.owner_profile.user.id %}
+                        <a href="{% url 'pts_pops_app:remove_post' post.id %}">Remove Post</a>
                         <a href="{% url 'pts_pops_app:edit_post' post.id %}">Edit Post</a>
                     {% endif %}
                 {% endif %}
             {% endfor %}
-        {% else %}
-        <p class="small-text">
-            {{ user_profile.user.username }} do not have any posts without photos at the moment.
-        </p>
         {% endif %}
         <hr>
         </div>
@@ -89,13 +86,13 @@
                         </p>
                         <p class="card-text text-end">
                             <small class="text-muted" >
-                                Written By: <a href="{% url 'users:user_profile' post.owner.id %}">{{ post.owner.username }}
-                            </a> on {{ post.date_of_entry | date:'M d, Y'}}
+                                Written on {{ post.date_of_entry | date:'M d, Y'}}
                             </small>
                         </p>
                         {% if request.user.id == post.owner_profile.user.id %}
                         <p class="card-text text-end">
                             <small class="text-muted">
+                                <a href="{% url 'pts_pops_app:remove_post' post.id %}">Remove Post</a>
                                 <a href="{% url 'pts_pops_app:edit_post' post.id %}">Edit Post</a>
                             </small>
                         </p>
@@ -106,10 +103,6 @@
                 </div>
             {% endif %}
         {% endfor %}
-        {% else %}
-        <p class="small-text">
-            {{ user_profile.user.username }} do not have any posts with photos at the moment.
-        </p>
         {% endif %}
         <hr>
         </div>
