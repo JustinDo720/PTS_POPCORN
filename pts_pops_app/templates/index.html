@@ -1,57 +1,72 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block title %}
     <title>PTSP - Home Page</title>
 {% endblock %}
 
 {% block content %}
-<!-- Our mission -->
-<h3>
-    Our mission:
-</h3>
+<div>
+     <div class="card position-absolute top-50 start-0 translate-middle-y"
+          style="width: 30rem; text-align:center; margin-top: 50px;">
+      <img src="{% static 'img/our_mission_2.png' %}" class="card-img-top" alt="our-mission"
+            >
+          <div class="card-body">
+            <h5 class="card-title">Our mission:</h5>
+            <p class="card-text">
+                The Pierre Toussaint Scholarship Fund provides students like us with the financial,
+                spiritual and professional assistance in our academic career. We, PTS scholars, are forever grateful
+                for our opportunities and want to raise funding to help PTS in continuing their thoughtful service. Our fundraiser will
+                open from April 14, 2021 to April 18, 2021 and our goal is $300, but more assistance is welcome. Please help us shatter this
+                limit and help other students like us to succeed and prosper!
+            </p>
+          </div>
+    </div>
+    <div class="card position-absolute top-50 start-50 translate-middle"
+         style="width: 30rem; height: 50rem; text-align:center;">
+      <img src="{% static 'img/popcorn3.png' %}" class="card-img-top" alt="pop-corn">
+      <div class="card-body">
+        <h5 class="card-title">How can you help?</h5>
+        <p class="card-text">
+            We are currently running a fundraiser! Do you love gourmet popcorn and helping deserving
+            college students? If so, please consider purchasing popcorn from my pop-up shop link. Your
+            purchase helps the Venerable Pierre Toussaint
+            Program which provides scholarships to students with
+            high academic performance who are engaged in their
+            community, and dedicated to their Catholic faith.
+            Additionally, 10% of your purchase goes to the
+            program’s Food Pantry Committee which allocates
+            funding to local parish food pantries.
 
-<p>
-    Pierre Toussaint Scholarship Fund provide students like us with the financial,
-    spiritual and professional assistance in our academic career. We are PTS scholar who are forever grateful
-    for our opportunities and want to raise funding to help PTS continue their wonderful service. Our fundraiser will
-    open from April 14,2021 to April 18,2021 and our goal is not limited but up to $300. Please help us shatter this
-    limit and help other students like us to succeed and prosper!
-</p>
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="background-color:lightgray;">
+            My pop-up shop link: <a href="https://popup.doublegood.com/s/uh5jd708"
+                                        style="text-decoration: none">Justin&Jason's Pop-Up Store</a>
+        </li>
+        <li class="list-group-item" style="background-color:lightgray;">
+            You could donate to Pierre Toussaint directly
+                    <a href="https://secure.archny.org/site/Donation2?df_id=4179&mfc_pref=T&4179.donation=form1"
+                        style="text-decoration: none">here</a>, which allows them to keep your donations.
+        </li>
+      </ul>
+    </div>
 
-<!-- How can you help? -->
-<h3>
-    How can you help?
-</h3>
+    <div class="card position-absolute top-50 end-0 translate-middle-y"
+            style="width: 30rem; text-align:center; margin-top: 42px;">
+      <img src="{% static 'img/community.png' %}" class="card-img-top" alt="community-photo">
+      <div class="card-body">
+        <h5 class="card-title">Please consider joining our community tab!</h5>
+        <p class="card-text">
+             We hope that you could revist this page to post your thoughts about the popcorn and overall show that you've
+            supported PTS. Please remember that with every purchase, 50% will go directly to PTS!! If you have any questions or
+            comments please email me: justindo720@gmail.com or submit a feedback
+        </p>
+        <a href="{% url 'pts_pops_app:community_page' %}" class="btn btn-primary">Go to Community Page</a>
+      </div>
+    </div>
+</div>
 
-<!-- List of things -->
-<ul>
-    <li>
-        We are currently running a fundraiser! Do you love gourmet popcorn and helping deserving
-        college students? If so, please consider purchasing
-        popcorn from my pop-up shop link: <a href="https://popup.doublegood.com/s/uh5jd708">Justin&Jason's Pop-Up Store</a> . Your
-        purchase helps the Venerable Pierre Toussaint
-        Program which provides scholarships to students with
-        high academic performance who are engaged in their
-        community, and dedicated to their Catholic faith.
-        Additionally, 10% of your purchase goes to the
-        program’s Food Pantry Committee which allocates
-        funding to local parish food pantries.
-    </li>
-    <li>
-        You could donate to Pierre Toussaint directly
-        <a href="https://secure.archny.org/site/Donation2?df_id=4179&mfc_pref=T&4179.donation=form1">here</a>,
-        which allows them to keep your donations.
-    </li>
-</ul>
-
-<!-- Join our community tab -->
-<h3>
-    Please consider joining our community tab!
-</h3>
-
-<p>
-    We hope that you could revist this page to post your thoughts about the popcorn and overall show that you've
-    supported PTS. Please remember that with every purchase, 50% will go directly to PTS!! If you have any questions or
-    comments please email me: justindo720@gmail.com or submit a feedback
-</p>
 {% endblock %}

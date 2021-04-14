@@ -6,34 +6,75 @@
 
 {% block content %}
     <h1 style="text-align:center">Welcome to the Community page!</h1>
-    <div id="write-about">
-
+    <div>
+        {% for post in  all_posts %}
+            {% if post.picture %}
+                <div class="card mb-3 mx-auto" style="max-width: 760px; max-height: 300px">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="/media/{{ post.picture }}" alt="post-photo"
+                        style="width:220px;height:200px">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <img class="card-title" src='/media/{{ post.owner_profile.user_photo }}'
+                            style="width:50px; height:50px"/>
+                        <p class="card-text">
+                            {{ post.comments | truncatechars:450| linebreaksbr }}
+                            {% if post|wordcount > 300 %}
+                                <a href="#">See More</a>
+                            {% endif %}
+                        </p>
+                        <p class="card-text text-end">
+                            <small class="text-muted" >
+                                Written By: <a href="{% url 'users:user_profile' post.owner.id %}">{{ post.owner.username }}
+                            </a> on {{ post.date_of_entry | date:'M d, Y'}}
+                            </small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% else %}
+                <div class="card text-center mx-auto" style="max-width: 760px; max-height: 300px; margin-bottom:15px;">
+                  <div class="card-header">
+                    <img class="card-title" src='/media/{{ post.owner_profile.user_photo }}'
+                            style="width:50px; height:50px" alt="profile-picture"/>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                        {{ post.comments | truncatechars:450| linebreaksbr }}
+                            {% if post|wordcount > 300 %}
+                                <a href="#">See More</a>
+                            {% endif %}
+                    </p>
+                  </div>
+                  <div class="card-footer text-muted">
+                      Written By: <a href="{% url 'users:user_profile' post.owner.id %}">{{ post.owner.username }}</a>
+                      on {{ post.date_of_entry | date:'M d, Y'}}
+                  </div>
+                </div>
+            {% endif %}
+        {% endfor  %}
     </div>
-    <div id="posts">
-        <ul style="list-style-type: none;">
-            {% for post in  all_posts %}
-                <li>
-                    <h3>{{ post.owner.username }}</h3>
-                   <img src="/media/{{ post.owner_profile.user_photo }}" alt="profile-picture">
-                    {% if post.picture  %}
-                        <img src="/media/{{ post.picture }}" alt="post-picture">
-
-                    {% endif %}
-                   <h2>
-                       {{ post }}
-                   </h2>
-                  <span>
-                      {{ post.date_of_entry | date:'M d, Y' }}
-                  </span>
-                    {% if user.id == post.owner.id  %}
-                      <a href="{% url 'pts_pops_app:edit_post' post.id %}">
-                          Edit Your Post
-                      </a>
-                    {% endif %}
-                </li>
-                <hr>
-            {% endfor  %}
-        </ul>
+    <div class="mx-auto">
+     <nav aria-label="Page navigation example">
+          <ul class="pagination ">
+              {% if all_posts.has_previous %}
+                <li class="page-item"><a
+                        href="{% url 'pts_pops_app:community_page' %}?page={{ all_posts.previous_page_number }}"
+                        class="btn btn-primary mx-auto">
+                            Previous Page
+                </a></li>
+              {% endif %}
+              {% if all_posts.has_next %}
+                  <li class="page-item"><a
+                          href="{% url 'pts_pops_app:community_page' %}?page={{ all_posts.next_page_number }}"
+                          class="btn btn-primary">
+                            Next Page
+                </a></li>
+              {% endif %}
+          </ul>
+        </nav>
     </div>
-
 {% endblock %}

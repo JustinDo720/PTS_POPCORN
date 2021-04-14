@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # My apps
     'pts_pops_app',
     'crispy_forms',
+    'bootstrap5',
     'bootstrap4',
     'users',
 
