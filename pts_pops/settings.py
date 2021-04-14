@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$-(z7f2f-z8poq%_bj616um1j^g6*q8b6-b3dy$)g$xo^n3n9q'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'localhost']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'bootstrap4',
     'users',
+    'storages',
 
     # Django default app
     'django.contrib.admin',
@@ -141,3 +142,28 @@ LOGOUT_REDIRECT_URL = '/'
 # Media file for images
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'pts_pops_app/media')
+
+# AWS S3 BUCKET
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_REGION_NAME = 'us-east-2'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'    # Static Files
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'   # Media Files
+
+
+# Debug Settings
+if os.environ.get('DEBUG') == 'True':
+    DEBUG = True
+else:
+    DEBUG = False
+
+# Heroku settings
+import django_heroku
+django_heroku.settings(locals())
