@@ -27,8 +27,8 @@
                        Written on {{ post.date_of_entry | date:'M d, Y' }}
                     </span>
                     {% if request.user.id == post.owner_profile.user.id %}
-                        <a href="{% url 'pts_pops_app:remove_post' post.id %}">Remove Post</a>
-                        <a href="{% url 'pts_pops_app:edit_post' post.id %}">Edit Post</a>
+                        <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
+                        <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
                     {% endif %}
                 {% endif %}
             {% endfor %}
@@ -57,8 +57,9 @@
       </ul>
      {% if request.user.id == user_profile.user.id %}
       <div class="card-body mx-auto">
-          <a href="{% url 'users:edit_user_profile' user_profile.user.id %}" class="card-link">Edit Profile</a>
-          <a href="{% url 'pts_pops_app:community_post' %}" class="card-link">Quick Post</a>
+          <a href="{% url 'users:edit_user_profile' user_profile.user.id %}" class="card-link btn btn-warning">
+              Edit Profile</a>
+          <a href="{% url 'pts_pops_app:community_post' %}" class="card-link btn btn-primary">Quick Post</a>
       </div>
       {% endif %}
     </div>
@@ -92,8 +93,8 @@
                         {% if request.user.id == post.owner_profile.user.id %}
                         <p class="card-text text-end">
                             <small class="text-muted">
-                                <a href="{% url 'pts_pops_app:remove_post' post.id %}">Remove Post</a>
-                                <a href="{% url 'pts_pops_app:edit_post' post.id %}">Edit Post</a>
+                                <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
+                                <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
                             </small>
                         </p>
                         {% endif %}

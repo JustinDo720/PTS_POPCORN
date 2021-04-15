@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>
+        PTSP - 404 Error Page
+    </title>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3 mx-auto" style="width: 40rem;height: 40rem;margin-top: 5px;">
+      <img src="{% static 'img/shock_404_img.png' %}" class="card-img-top" alt="404-page">
+      <div class="card-body" style="text-align:center">
+        <h5 class="card-title">500 System Error</h5>
+        <p class="card-text">
+            This is a really bad issue because it's an internal error. Send me feedback of what happened.
+        </p>
+         <a href="{% url 'pts_pops_app:index' %}" class="btn btn-outline-primary">
+            Return Home
+        </a>
+      </div>
+    </div>
+{% endblock %}

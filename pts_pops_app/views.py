@@ -113,3 +113,11 @@ def submit_feedback(request):
     }
 
     return render(request, 'submit_feedback.html', context=context)
+
+
+def custom_404(request, exception):
+    return render(request, 'error_handle/404.html')
+
+
+def custom_500(request):
+    return render(request, 'error_handle/500.html')
