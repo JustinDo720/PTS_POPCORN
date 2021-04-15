@@ -22,7 +22,7 @@ class AnonymousEntries(forms.ModelForm):
         model=Post
         fields = ['comments', 'picture']
         labels = {'comments': 'Please share your thoughts!', 'picture': 'Upload photos of your popcorn!'}
-        widgets = {'comments': forms.Textarea(attrs={'cols':80})}
+        widgets = {'comments': forms.Textarea(attrs={'rows':3})}
 
 
 class FeedbackForm(forms.ModelForm):

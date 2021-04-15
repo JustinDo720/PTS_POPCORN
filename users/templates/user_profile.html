@@ -9,7 +9,7 @@
 {% block content %}
     <!-- Post of User without Photos -->
     <div class="card text-white bg-secondary mb-3 position-absolute top-50 start-0 translate-middle-y"
-         style="max-width: 45rem; width: 45rem; height: 50rem; max-height:50rem; overflow-y: scroll;">
+         style="max-width: 45rem; width: 45rem; height:30rem; max-height:30rem; overflow-y: scroll; margin-left:5px;">
         <div class="card-header" style="text-align:center">
             {{ user_profile.user.username | title }}'s Posts Without Photos
         </div>
@@ -39,7 +39,7 @@
 
    <!-- User Profile Card-->
     <div class="card position-absolute top-50 start-50 translate-middle" style="width: 18rem; margin-top:15px;">
-      <img src="/media/{{ user_profile.user_photo }}" class="card-img-top" alt="profile-picture">
+      <img src="{{ AWS_BUCKET_BASEURL }}/{{ user_profile.user_photo }}" class="card-img-top" alt="profile-picture">
       <div class="card-body">
         <h4 class="card-title mx-auto">{{ user_profile.user.username | title}}</h4>
           {% if user_profile.user_bio %}
@@ -65,7 +65,7 @@
 
     <!-- Post of User with Photos -->
     <div class="card text-white bg-secondary mb-3 position-absolute top-50 end-0 translate-middle-y"
-         style="max-width: 45rem; width: 45rem; height:50rem; max-height:50rem; overflow-y: scroll;">
+         style="max-width: 45rem; width: 45rem; height:30rem; max-height:30rem; overflow-y: scroll; margin-right:5px;">
         <div class="card-header" style="text-align:center">
             {{ user_profile.user.username | title }}'s Posts With Photos
         </div>
@@ -76,7 +76,7 @@
                 <div class="card mb-3 mx-auto" style="max-width: 760px; max-height: 300px">
                   <div class="row g-0">
                     <div class="col-md-4">
-                      <img src="/media/{{ post.picture }}" alt="post-photo"
+                      <img src="{{ AWS_BUCKET_BASEURL }}/{{ post.picture }}" alt="post-photo"
                         style="width:220px;height:200px">
                     </div>
                     <div class="col-md-8">

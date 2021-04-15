@@ -4,7 +4,10 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from pts_pops_app.models import Profile, Post
 from django.http import Http404
+import os
+
 # Create your views here.
+
 
 def register(request):
     if request.method != "POST":
@@ -24,9 +27,12 @@ def user_profile(request, profile_id):
     # We are going to use profile to locate our user's info
     profile = Profile.objects.get(id=profile_id)
     user_posts = profile.post_set.order_by('-date_of_entry')
+    AWS_BUCKET_BASEURL = 'https://%s.s3.amazonaws.com' % os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
     context = {
         'user_profile': profile,
         'user_posts': user_posts,
+        'AWS_BUCKET_BASEURL': AWS_BUCKET_BASEURL,
     }
     return render(request, 'user_profile.html', context)
 
@@ -34,9 +40,6 @@ def user_profile(request, profile_id):
 def edit_user_profile(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     curr_user = User.objects.get(id=profile_id)
-
-    if request.user != curr_user.username:
-        raise Http404
 
     if request.method != 'POST':
         photo_form = ChangeProfilePhoto(instance=profile)

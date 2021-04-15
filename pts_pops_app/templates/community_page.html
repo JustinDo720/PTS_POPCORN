@@ -38,9 +38,6 @@
                             {% endbuttons %}
                         </form>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -75,16 +72,16 @@
                 <div class="card mb-3 mx-auto" style="max-width: 760px; max-height: 300px; margin-top:15px;">
                   <div class="row g-0">
                     <div class="col-md-4">
-                      <img src="/media/{{ post.picture }}" alt="post-photo"
+                      <img src="{{ AWS_BUCKET_BASEURL }}/{{ post.picture }}" alt="post-photo"
                         style="width:220px;height:200px">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
                         {% if post.owner_profile %}
-                        <img class="card-title" src='/media/{{ post.owner_profile.user_photo }}'
+                        <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/{{ post.owner_profile.user_photo }}'
                             style="width:50px; height:50px"/>
                         {% else %}
-                        <img class="card-title" src='/media/default_profile_pic.jpg'
+                        <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/default_profile_pic.jpg'
                         style="width:50px; height:50px"/>
                         {% endif %}
                         <p class="card-text">
@@ -115,12 +112,12 @@
                 <div class="card text-center mx-auto" style="max-width: 760px; max-height: 300px; margin-bottom:15px;">
                  {% if post.owner_profile %}
                       <div class="card-header">
-                        <img class="card-title" src='/media/{{ post.owner_profile.user_photo }}'
+                        <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/{{ post.owner_profile.user_photo }}'
                                 style="width:50px; height:50px" alt="profile-picture"/>
                       </div>
                  {% else %}
                      <div class="card-header">
-                        <img class="card-title" src='/media/default_profile_pic.jpg'
+                        <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/default_profile_pic.jpg'
                                 style="width:50px; height:50px" alt="profile-picture"/>
                       </div>
                  {% endif %}

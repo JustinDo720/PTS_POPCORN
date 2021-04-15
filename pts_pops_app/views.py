@@ -4,10 +4,12 @@ from .models import Post
 from django.core.paginator import Paginator
 from itertools import chain
 from django.http import Http404
+import os
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
 
 def community_page(request):
     if request.method != 'POST':
@@ -41,7 +43,8 @@ def community_page(request):
 
     all_posts = paginator.get_page(page_number)
 
-    context = {'all_posts': all_posts, 'form':form}
+    AWS_BUCKET_BASEURL = 'https://%s.s3.amazonaws.com' % os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    context = {'all_posts': all_posts, 'form':form, 'AWS_BUCKET_BASEURL': AWS_BUCKET_BASEURL}
     return render(request, 'community_page.html', context=context)
 
 
