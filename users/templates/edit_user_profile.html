@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load bootstrap5 %}
+{% load static %}
 
 {% block title %}
     <title>
@@ -8,24 +9,28 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 40rem; margin-top: 15px;">
-        <div class="card-header" style="text-align:center;">Edit Your Post</div>
-        <div class="card-body">
-            <form action="{% url 'users:edit_user_profile' profile.user.id %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% bootstrap_form photo_form %}
-                {% bootstrap_form username_form %}
-                {% bootstrap_form email_form  %}
-                {% bootstrap_form bio_form %}
-                <div style="margin-top: 15px;">
-                    {% buttons %}
-                        <button name="submit" style="margin-left:256px">
-                            Save Changes
-                        </button>
-                    {% endbuttons %}
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 40rem; margin-top:15px; background-color:#a50527">
+      <div class="card-header mx-auto">
+          <img src="{% static 'img/pts1.png' %}" class='rounded-3 rounded img-thumbnail' alt="pts-logo"
+          style="width:75px; height:75px;"> PTS POPCORN!
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center">Edit Your Profile</h5>
+        <form action="{% url 'users:edit_user_profile' profile.user.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form photo_form %}
+            {% bootstrap_form username_form %}
+            {% bootstrap_form email_form  %}
+            {% bootstrap_form bio_form %}
+            {% buttons %}
+                <div style="margin-top: 15px;" class="col-md-12 text-center">
+                    <button name="submit">
+                        Save Changes
+                    </button>
                 </div>
-            </form>
-        </div>
+            {% endbuttons %}
+        </form>
+      </div>
     </div>
 
 {% endblock %}

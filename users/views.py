@@ -41,6 +41,9 @@ def edit_user_profile(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     curr_user = User.objects.get(id=profile_id)
 
+    if profile.user != request.user:
+        raise Http404
+
     if request.method != 'POST':
         photo_form = ChangeProfilePhoto(instance=profile)
         email_form = ChangeProfileEmail(instance=profile)

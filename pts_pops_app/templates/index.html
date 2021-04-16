@@ -7,12 +7,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-sm">
-    <!-- OUr Mission -->
-     <div class="card position-absolute top-50 start-0 translate-middle-y shadow-lg bg-body rounded"
-          style="width: 25rem; height:auto; text-align:center; margin-top: 50px; margin-left: 15px;">
-      <img src="{% static 'img/our_mission_2.png' %}" class="card-img-top" alt="our-mission"
-            >
+<div class="row mb-5 mt-5">
+        <!-- Our mission Card -->
+        <div class="card col-1 order-1 shadow-lg bg-body rounded"
+          style="width: 25rem; text-align:center; margin-top: 50px;">
+              <img src="{% static 'img/our_mission_2.png' %}" class="card-img-top" alt="our-mission">
           <div class="card-body">
             <h5 class="card-title">Our mission:</h5>
             <p class="card-text">
@@ -22,127 +21,103 @@
                 open from April 14, 2021 to April 18, 2021 and our goal is $700, but more assistance is welcome. Please help us shatter this
                 limit and help other students like us to succeed and prosper!
             </p>
+              <a href="https://archny.org/ministries-and-offices/cultural-diversity-apostolate/black-ministry/"
+                 class="btn btn-primary">
+                  Visit Their Website
+              </a>
           </div>
-    </div>
-
-    <!-- How could you help -->
-    <div class="position-absolute top-50 start-50 translate-middle" style="margin-top: 80px; height:auto;">
-        <div class="card shadow-lg"
-         style="text-align:center;width: 65rem;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="{% static 'img/popcorn3.png' %}" alt="pop-corn" style="width:400px; height:400px;">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body" style="margin-left:60px;">
-                    <h5 class="card-title">How can you help?</h5>
-                    <p class="card-text">
-                        We are currently running a fundraiser! Do you love gourmet popcorn and helping deserving
-                    college students? If so, please consider purchasing popcorn from my pop-up shop link. Your
-                    purchase helps the Venerable Pierre Toussaint
-                    Program which provides scholarships to students with
-                    high academic performance who are engaged in their
-                    community, and dedicated to their Catholic faith.
-                    Additionally, 10% of your purchase goes to the
-                    program’s Food Pantry Committee which allocates
-                    funding to local parish food pantries.
-                    </p>
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item" style="background-color:lightgray;">
-                            My pop-up shop link: <a href="https://popup.doublegood.com/s/uh5jd708"
-                                                        style="text-decoration: none">Justin&Jason's Pop-Up Store</a>
-                        </li>
-                        <li class="list-group-item" style="background-color:lightgray;">
-                            You could donate to Pierre Toussaint directly
-                                    <a href="https://secure.archny.org/site/Donation2?df_id=4179&mfc_pref=T&4179.donation=form1"
-                                        style="text-decoration: none">here</a>, which allows them to keep your donations.
-                        </li>
-                      </ul>
-                  </div>
-                </div>
-            </div>
         </div>
-        <div class="card-group" style="margin-top:5px; height:auto;">
-          <div class="card">
-                <img src="{% static 'img/dg_homepage.PNG' %}" class="card-img-top" alt="db-homepage"
-                    style="height:300px;">
-                <div class="card-body">
-                  <h5 class="card-title">Vist our Double Good Site</h5>
-                  <p class="card-text">
-                      Open up our Double Good link and check out all the variety of popcorns available
-                  </p>
+
+        <!-- How could you help -->
+        <div class="col-7 order-2" style="margin-top:5px;">
+            <div class="card shadow-lg"
+             style="text-align:center;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="{% static 'img/popcorn3.png' %}" alt="pop-corn" style="width:400px; height:400px;">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body" style="margin-left:60px;">
+                        <h5 class="card-title">How can you help?</h5>
+                        <p class="card-text">
+                            We are currently running a fundraiser! Do you love gourmet popcorn and helping deserving
+                        college students? If so, please consider purchasing popcorn from my pop-up shop link. Your
+                        purchase helps the Venerable Pierre Toussaint
+                        Program which provides scholarships to students with
+                        high academic performance who are engaged in their
+                        community, and dedicated to their Catholic faith.
+                        Additionally, 10% of your purchase goes to the
+                        program’s Food Pantry Committee which allocates
+                        funding to local parish food pantries.
+                        </p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="background-color:lightgray;">
+                                My pop-up shop link: <a href="https://popup.doublegood.com/s/uh5jd708"
+                                                            style="text-decoration: none"
+                                                            class="btn btn-outline-primary">
+                                Justin&Jason's Pop-Up Store</a>
+                            </li>
+                            <li class="list-group-item" style="background-color:lightgray;">
+                                You could donate to Pierre Toussaint directly
+                                        <a href="https://secure.archny.org/site/Donation2?df_id=4179&mfc_pref=T&4179.donation=form1"
+                                            style="text-decoration: none"
+                                            class="btn btn-outline-primary">
+                                            here</a>, which allows them to keep your donations.
+                            </li>
+                          </ul>
+                      </div>
+                    </div>
                 </div>
-              </div>
-              <div class="card">
-                <img src="{% static 'img/pop_corn_selection.PNG' %}" class="card-img-top" alt="popcorn-selection"
-                    style="width:300px; height:300px;">
-                <div class="card-body">
-                  <h5 class="card-title">Select your choice of Popcorn</h5>
-                  <p class="card-text">
-                      Add your favorite Popcorn to the cart. In Queso Fire sounds really nice!!!
-                  </p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="{% static 'img/we-scale.PNG' %}" class="card-img-top" alt="we-scale"
-                  style="height:300px;">
-                <div class="card-body">
-                  <h5 class="card-title">Send A Support Message</h5>
-                  <p class="card-text">
-                      After donating please send us a Support Message for our leaders to see how we've been doing!
-                      We recommend you type "We Scale!!!!"
-                  </p>
-                </div>
-              </div>
             </div>
-    </div>
+            <div class="card-group" style="margin-top:5px;">
+              <div class="card">
+                    <img src="{% static 'img/dg_homepage.PNG' %}" class="card-img-top" alt="db-homepage"
+                        style="height:300px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Vist our Double Good Site</h5>
+                      <p class="card-text">
+                          Open up our Double Good link and check out all the variety of popcorns available
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="{% static 'img/pop_corn_selection.PNG' %}" class="card-img-top" alt="popcorn-selection"
+                        style="width:300px; height:300px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Select your choice of Popcorn</h5>
+                      <p class="card-text">
+                          Add your favorite Popcorn to the cart. In Queso Fire sounds really nice!!!
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="{% static 'img/we-scale.PNG' %}" class="card-img-top" alt="we-scale"
+                      style="height:300px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Send A Support Message</h5>
+                      <p class="card-text">
+                          After donating please send us a Support Message for our leaders to see how we've been doing!
+                          We recommend you type "We Scale!!!!"
+                      </p>
+                    </div>
+                  </div>
+             </div>
+        </div>
 
-    <!--
-    <div class="card position-absolute top-50 start-50 translate-middle shadow-lg"
-         style="width: 27rem; height: 45rem; text-align:center;">
-      <img src="{% static 'img/popcorn3.png' %}" class="card-img-top" alt="pop-corn">
-      <div class="card-body">
-        <h5 class="card-title">How can you help?</h5>
-        <p class="card-text">
-            We are currently running a fundraiser! Do you love gourmet popcorn and helping deserving
-            college students? If so, please consider purchasing popcorn from my pop-up shop link. Your
-            purchase helps the Venerable Pierre Toussaint
-            Program which provides scholarships to students with
-            high academic performance who are engaged in their
-            community, and dedicated to their Catholic faith.
-            Additionally, 10% of your purchase goes to the
-            program’s Food Pantry Committee which allocates
-            funding to local parish food pantries.
 
-        </p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item" style="background-color:lightgray;">
-            My pop-up shop link: <a href="https://popup.doublegood.com/s/uh5jd708"
-                                        style="text-decoration: none">Justin&Jason's Pop-Up Store</a>
-        </li>
-        <li class="list-group-item" style="background-color:lightgray;">
-            You could donate to Pierre Toussaint directly
-                    <a href="https://secure.archny.org/site/Donation2?df_id=4179&mfc_pref=T&4179.donation=form1"
-                        style="text-decoration: none">here</a>, which allows them to keep your donations.
-        </li>
-      </ul>
-    </div> -->
-
-    <!-- Please join our community -->
-    <div class="card position-absolute top-50 end-0 translate-middle-y shadow-lg  bg-body rounded"
-            style="width: 25rem; text-align:center; margin-top: 42px; margin-right: 15px; height:auto;">
-      <img src="{% static 'img/community.png' %}" class="card-img-top" alt="community-photo">
-      <div class="card-body">
-        <h5 class="card-title">Please consider joining our community tab!</h5>
-        <p class="card-text">
-             We hope that you could revist this page to post your thoughts about the popcorn and overall show that you've
-            supported PTS. Please remember that with every purchase, 50% will go directly to PTS!! If you have any questions or
-            comments please email me: justindo720@gmail.com or submit a feedback
-        </p>
-        <a href="{% url 'pts_pops_app:community_page' %}" class="btn btn-primary">Go to Community Page</a>
-      </div>
-    </div>
+        <!-- Our mission Card -->
+        <div class="card col-1 order-3 shadow-lg bg-body rounded"
+          style="width: 25rem; text-align:center; margin-top: 50px;">
+         <img src="{% static 'img/community.png' %}" class="card-img-top" alt="community-photo">
+          <div class="card-body">
+            <h5 class="card-title">Please consider joining our community tab!</h5>
+            <p class="card-text">
+                 We hope that you could revist this page to post your thoughts about the popcorn and overall show that you've
+                supported PTS. Please remember that with every purchase, 50% will go directly to PTS!! If you have any questions or
+                comments please email me: justindo720@gmail.com or submit a feedback
+            </p>
+            <a href="{% url 'pts_pops_app:community_page' %}" class="btn btn-primary">Go to Community Page</a>
+          </div>
+        </div>
 </div>
-
 {% endblock %}
