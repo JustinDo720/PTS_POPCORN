@@ -1,11 +1,11 @@
-from django.forms import forms, ModelForm, Textarea
+from django.forms import forms, ModelForm, Textarea, EmailField
 # Here is the default User model
 from django.contrib.auth.models import User
 # For our creation/register form we are using the default creation form
 from django.contrib.auth.forms import UserCreationForm
 # We are going to use pts_pops_app Profile Model to allow users to edit their profile
 from pts_pops_app.models import Profile
-
+from django import forms
 
 class RegisterForm(UserCreationForm):
     # Inheriting from parent UserCreationForm
@@ -23,13 +23,16 @@ class ChangeProfilePhoto(ModelForm):
             'user_photo': 'Your Profile Picture',
         }
 
+
 class ChangeProfileEmail(ModelForm):
+    user_email = EmailField(required=False, help_text='This field is not required!')
     class Meta:
         model = Profile
         fields = ['user_email']
         labels = {
             'user_email': 'Your Email',
         }
+
 
 class ChangeProfileBio(ModelForm):
     class Meta:
@@ -40,6 +43,7 @@ class ChangeProfileBio(ModelForm):
         }
         # Cols just expands the length of the text box
         widgets = {'user_bio': Textarea(attrs={'cols':100})}
+
 
 class ChangeUserName(ModelForm):
     password = None

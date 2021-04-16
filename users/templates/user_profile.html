@@ -7,105 +7,108 @@
 {% endblock title %}
 
 {% block content %}
-    <!-- Post of User without Photos -->
-    <div class="card text-white bg-secondary mb-3 position-absolute top-50 start-0 translate-middle-y"
-         style="max-width: 45rem; width: 45rem; height:30rem; max-height:30rem; overflow-y: scroll; margin-left:5px;">
-        <div class="card-header" style="text-align:center">
-            {{ user_profile.user.username | title }}'s Posts Without Photos
-        </div>
-        <div class="card-body">
-        {% if user_posts %}
-            {% for post in user_posts %}
-                {% if not post.picture %}
-                    <p class="card-text">
-                        {{ post.comments | truncatechars:450| linebreaksbr }}
-                        {% if post|wordcount > 300 %}
-                            <a href="#" style="text-decoration: none; color:black">See More</a>
-                        {% endif %}
-                    </p>
-                    <span>
-                       Written on {{ post.date_of_entry | date:'M d, Y' }}
-                    </span>
-                    {% if request.user.id == post.owner_profile.user.id %}
-                        <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
-                        <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        <hr>
-        </div>
-    </div>
-
-   <!-- User Profile Card-->
-    <div class="card position-absolute top-50 start-50 translate-middle" style="width: 18rem; margin-top:15px;">
-      <img src="{{ AWS_BUCKET_BASEURL }}/{{ user_profile.user_photo }}" class="card-img-top" alt="profile-picture">
-      <div class="card-body">
-        <h4 class="card-title mx-auto">{{ user_profile.user.username | title}}</h4>
-          {% if user_profile.user_bio %}
-            <p class="card-text">
-                {{ user_profile.user_bio }}
-            </p>
-          {% endif %}
-      </div>
-      <ul class="list-group list-group-flush">
-          {% if user_profile.user_email %}
-            <li class="list-group-item">
-                 Email: {{ user_profile.user_email }}
-            </li>
-          {% endif %}
-      </ul>
-     {% if request.user.id == user_profile.user.id %}
-      <div class="card-body mx-auto">
-          <a href="{% url 'users:edit_user_profile' user_profile.user.id %}" class="card-link btn btn-warning">
-              Edit Profile</a>
-          <a href="{% url 'pts_pops_app:community_post' %}" class="card-link btn btn-primary">Quick Post</a>
-      </div>
-      {% endif %}
-    </div>
-
-    <!-- Post of User with Photos -->
-    <div class="card text-white bg-secondary mb-3 position-absolute top-50 end-0 translate-middle-y"
-         style="max-width: 45rem; width: 45rem; height:30rem; max-height:30rem; overflow-y: scroll; margin-right:5px;">
-        <div class="card-header" style="text-align:center">
-            {{ user_profile.user.username | title }}'s Posts With Photos
-        </div>
-        <div class="card-body">
-        {% if user_posts %}
-        {% for post in user_posts %}
-            {% if post.picture %}
-                <div class="card mb-3 mx-auto" style="max-width: 760px; max-height: 300px">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="{{ AWS_BUCKET_BASEURL }}/{{ post.picture }}" alt="post-photo"
-                        style="width:220px;height:200px">
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <p style="color:black; text-align:center">
+    <div class="row" style="margin-top:50px;">
+        <!-- Post of User without Photos -->
+        <div class="card mr-auto col-7 order-1 text-white bg-secondary mb-3"
+             style="max-width: 45rem; max-height:30rem; overflow-y: scroll; margin-left:5px;">
+            <div class="card-header" style="text-align:center">
+                {{ user_profile.user.username | title }}'s Posts Without Photos
+            </div>
+            <div class="card-body">
+            {% if user_posts %}
+                {% for post in user_posts %}
+                    {% if not post.picture %}
+                        <p class="card-text">
                             {{ post.comments | truncatechars:450| linebreaksbr }}
+                            {% if post|wordcount > 300 %}
+                                <a href="#" style="text-decoration: none; color:black">See More</a>
+                            {% endif %}
                         </p>
-                        <p class="card-text text-end">
-                            <small class="text-muted" >
-                                Written on {{ post.date_of_entry | date:'M d, Y'}}
-                            </small>
-                        </p>
+                        <span>
+                           Written on {{ post.date_of_entry | date:'M d, Y' }}
+                        </span>
                         {% if request.user.id == post.owner_profile.user.id %}
-                        <p class="card-text text-end">
-                            <small class="text-muted">
-                                <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
-                                <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
-                            </small>
-                        </p>
+                            <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
+                            <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
                         {% endif %}
+                       <hr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+
+       <!-- User Profile Card-->
+        <div class="card mx-auto col-2 order-2" style="width: 18rem; margin-top:15px;">
+          <img src="{{ AWS_BUCKET_BASEURL }}/{{ user_profile.user_photo }}" class="card-img-top" alt="profile-picture">
+          <div class="card-body">
+            <h4 class="card-title mx-auto">{{ user_profile.user.username | title}}</h4>
+              {% if user_profile.user_bio %}
+                <p class="card-text">
+                    {{ user_profile.user_bio }}
+                </p>
+              {% endif %}
+          </div>
+          <ul class="list-group list-group-flush">
+              {% if user_profile.user_email %}
+                <li class="list-group-item">
+                     Email: {{ user_profile.user_email }}
+                </li>
+              {% endif %}
+          </ul>
+         {% if request.user.id == user_profile.user.id %}
+          <div class="card-body mx-auto">
+              <a href="{% url 'users:edit_user_profile' user_profile.user.id %}" class="card-link btn btn-warning">
+                  Edit Profile</a>
+              <a href="{% url 'pts_pops_app:community_post' %}" class="card-link btn btn-primary">Quick Post</a>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Post of User with Photos -->
+        <div class="card ml-auto text-white bg-secondary mb-3 col-7 order-3"
+             style="max-width: 45rem; max-height:30rem; overflow-y: scroll; margin-right:5px;">
+            <div class="card-header" style="text-align:center">
+                {{ user_profile.user.username | title }}'s Posts With Photos
+            </div>
+            <div class="card-body">
+            {% if user_posts %}
+            {% for post in user_posts %}
+                {% if post.picture %}
+                    <div class="card mb-3 mx-auto" style="max-width: 760px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="{{ AWS_BUCKET_BASEURL }}/{{ post.picture }}" alt="post-photo"
+                            style="width:220px;height:200px">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <p style="color:black; text-align:center">
+                                {{ post.comments | truncatechars:450| linebreaksbr }}
+                            </p>
+                            <p class="card-text text-end">
+                                <small class="text-muted" >
+                                    Written on {{ post.date_of_entry | date:'M d, Y'}}
+                                </small>
+                            </p>
+                            {% if request.user.id == post.owner_profile.user.id %}
+                            <p class="card-text col-md-12 text-center">
+                                <small class="text-muted">
+                                    <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
+                                    <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
+                                </small>
+                            </p>
+                            {% endif %}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                    <hr>
+                {% endif %}
+            {% endfor %}
             {% endif %}
-        {% endfor %}
-        {% endif %}
-        <hr>
+
+            </div>
         </div>
     </div>
 {% endblock %}

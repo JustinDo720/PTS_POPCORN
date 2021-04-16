@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load static %}
 
 {% block title %}
     <title>
@@ -8,14 +9,25 @@
 {% endblock title %}
 
 {% block content %}
-    <form method="post" action="{% url 'pts_pops_app:edit_post' post_requested.id %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button>
-                Submit
-            </button>
-        {% endbuttons %}
-    </form>
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 30rem; margin-top:15px; background-color:#a50527">
+      <div class="card-header mx-auto">
+          <img src="{% static 'img/pts1.png' %}" class='rounded-3 rounded img-thumbnail' alt="pts-logo"
+          style="width:75px; height:75px;"> PTS POPCORN!
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center">Edit Your Post</h5>
+        <form method="post" action="{% url 'pts_pops_app:edit_post' post_requested.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <div style="margin-top: 15px;" class="col-md-12 text-center">
+                    <button name="submit">
+                        Save Changes
+                    </button>
+                </div>
+            {% endbuttons %}
+        </form>
+      </div>
+    </div>
 
 {% endblock content %}
