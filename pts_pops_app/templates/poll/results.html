@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>
+        PTSP - Results
+    </title>
+{% endblock  %}
+
+{% block content %}
+    <div class="p-5 mb-4 bg-light rounded-3 mx-auto">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold" style="text-align:center">Results</h1>
+          {% for choice in all_choices %}
+               {% if choice.choice_photo %}
+                   <p class="col-md-5 fs-4 mx-auto shadow-lg p-3 mb-5 bg-body rounded">
+                       <img src="{{ AWS_BUCKET_BASEURL }}/{{ choice.choice_photo }}" alt="choice-photo"/>
+                            {{ choice }}
+                   </p>
+               {% else %}
+                    <p class="col-md-8 fs-4">
+                        {{ choice }}
+                    </p>
+               {% endif %}
+        {% endfor %}
+      <div class="col-sm-1 mx-auto" style="text-align:center">
+          <a href="#" class="btn btn-primary">
+            Back to the top
+          </a>
+      </div>
+
+      </div>
+    </div>
+{% endblock %}

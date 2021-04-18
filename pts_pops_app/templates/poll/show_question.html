@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>
+        PTSP - Vote!
+    </title>
+{% endblock %}
+{% block content %}
+
+
+<form action="{% url 'pts_pops_app:voteMechanism' question_requested.id %}" method="post">
+	{% csrf_token %}
+        <div class="card text-center mx-auto" style="width:45rem; margin-top:15px;">
+          <div class="card-header">
+            PTSP - Vote!!
+          </div>
+          <div class="card-body" style="background: whitesmoke;">
+            <h3 class="card-title">{{ question_requested.question }}</h3>
+            <p class="card-text">
+                {% for choice in all_choices %}
+                    <div class="form-check">
+                    <!-- When we send the name "choice" we are going to grab it with request.POST['choice']-->
+                        <input
+                            type="radio"
+                            name="choice"
+                            class="form-check-input"
+                            id="choice{{ forloop.counter }}"
+                            value="{{ choice.id }}"
+                        />
+                        <label for="choice{{ forloop.counter }}">
+                             {% if choice.choice_photo %}
+                                 <img src="{{ AWS_BUCKET_BASEURL }}/{{ choice.choice_photo }}"
+                                      style="width:250px; height: 250px"/> {{ choice.choice_text }}
+                            {% else %}
+                                {{ choice.choice_text }}
+                            {% endif %}
+                        </label>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </p>
+            <input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4"/>
+          </div>
+    </div>
+</form>
+{% endblock %}

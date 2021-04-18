@@ -20,8 +20,8 @@
                     {% if not post.picture %}
                         <p class="card-text">
                             {{ post.comments | truncatechars:450| linebreaksbr }}
-                            {% if post|wordcount > 300 %}
-                                <a href="#" style="text-decoration: none; color:black">See More</a>
+                            {% if post.comments|length > 300 %}
+                                <a href="{% url 'pts_pops_app:view_full_post' post.id %}" style="text-decoration: none; color:#6511b0">See More</a>
                             {% endif %}
                         </p>
                         <span>
@@ -85,6 +85,12 @@
                           <div class="card-body">
                             <p style="color:black; text-align:center">
                                 {{ post.comments | truncatechars:450| linebreaksbr }}
+                                {% if post.comments|length > 300 %}
+                                    <a href="{% url 'pts_pops_app:view_full_post' post.id %}"
+                                       style="text-decoration: none; color:#6511b0">
+                                        See More
+                                    </a>
+                                {% endif %}
                             </p>
                             <p class="card-text text-end">
                                 <small class="text-muted" >

@@ -41,6 +41,17 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="{% url 'pts_pops_app:community_page' %}">Community Page</a></li>
+                  {% if user.is_superuser %}
+                      <li><a class="dropdown-item" href="{% url 'pts_pops_app:admin_add_question' %}">
+                          Create Question
+                      </a></li>
+                      <li><a class="dropdown-item" href="{% url 'pts_pops_app:admin_add_choice' %}">
+                          Add Choices
+                      </a></li>
+                  {% endif %}
+                <li><a class="dropdown-item" href="{% url 'pts_pops_app:vote_homepage' %}">
+                          Vote!!!
+              </a></li>
                 <li><a class="dropdown-item" href="{% url 'pts_pops_app:submit_feedback' %}">Submit Feedback</a></li>
               </ul>
             </li>
@@ -104,6 +115,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     -->
   </body>
+ <!-- FOOTER -->
+
 </html>
 
 

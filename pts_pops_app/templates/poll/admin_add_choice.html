@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block title %}
+    <title>
+            PTS - Create Poll
+    </title>
+{% endblock %}
+
+{% block content %}
+ <!-- Add Choices -->
+    <div class="card text-white mb-3 mx-auto" style="max-width: 40rem; background-color: #a50527; margin-top:100px;">
+      <div class="card-header mx-auto">
+          <img src="{% static 'img/pts1.png' %}" class='rounded-3 rounded img-thumbnail' alt="pts-logo"
+          style="width:75px; height:75px;"> PTS POPCORN!
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center">Add Choice To Question</h5>
+        <!-- Make sure you have the multipart/form-data because you have the imgs to deal with otherwise they wont go through -->
+        <form action="{% url 'pts_pops_app:admin_add_choice' %}" method="post" class="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <div style="margin-top: 15px;" class="col-md-12 text-center">
+                    <button name="submit">
+                        Add
+                    </button>
+                </div>
+            {% endbuttons %}
+        </form>
+      </div>
+    </div>
+{% endblock %}

@@ -55,7 +55,7 @@
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 {% buttons %}
-                    <div style="margin-top: 15px;">
+                    <div class='col-md-12 text-center' style="margin-top: 15px;">
                         <button name="submit"
                         class="mx-auto">
                             Share
@@ -86,9 +86,9 @@
                         style="width:50px; height:50px"/>
                         {% endif %}
                         <p class="card-text">
-                            {{ post.comments | truncatechars:450| linebreaksbr }}
-                            {% if post|wordcount > 300 %}
-                                <a href="#">See More</a>
+                            {{ post.comments | truncatechars:450 | linebreaksbr }}
+                            {% if post.comments|length > 300 %}
+                                <a href="{% url 'pts_pops_app:view_full_post' post.id %}">See More</a>
                             {% endif %}
                         </p>
                       {% if post.owner_profile %}
@@ -125,8 +125,8 @@
                   <div class="card-body">
                     <p class="card-text">
                         {{ post.comments | truncatechars:450| linebreaksbr }}
-                            {% if post|wordcount > 300 %}
-                                <a href="#">See More</a>
+                            {% if post.comments|length > 300 %}
+                                <a href="{% url 'pts_pops_app:view_full_post' post.id %}">See More</a>
                             {% endif %}
                     </p>
                   </div>

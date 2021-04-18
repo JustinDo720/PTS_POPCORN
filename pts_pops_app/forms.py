@@ -1,5 +1,6 @@
-from .models import Post, Feedback
+from .models import Post, Feedback, Question, Choice
 from django import forms
+
 
 class UserEntries(forms.ModelForm):
     class Meta:
@@ -33,3 +34,17 @@ class FeedbackForm(forms.ModelForm):
                   'good': "What do you think?",
                   'name': "You do not have to share your name if you don't want to"
                   }
+
+
+class QuestionMaker(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['question']
+        labels = {'question': 'What type of Question would you like to make?'}
+
+
+class AddChoice(forms.ModelForm):
+    class Meta:
+        model = Choice
+        fields = ['question', 'choice_photo', 'choice_text']
+        labels = {'question':'Choose your question', 'choice_photo':'Enter photo of choice', 'choice_text':'Choices'}

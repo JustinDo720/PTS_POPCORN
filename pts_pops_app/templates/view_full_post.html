@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}
+    <title>
+        PTSP - View Full Post
+    </title>
+{% endblock %}
+
+{% block content %}
+    {% if post_to_view.picture %}
+        <div class="card mb-3 mx-auto mt-5" style="max-width: 70rem; max-height: 70rem;">
+          <img src="{{ AWS_BUCKET_BASEURL }}/{{ post_to_view.picture }}" class="card-img-top" alt="post-photo">
+          <div class="card-body">
+            <h5 class="card-title">
+                {% if post_to_view.owner_profile %}
+                <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/{{ post_to_view.owner_profile.user_photo }}'
+                    style="width:50px; height:50px"/>
+                {% else %}
+                <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/default_profile_pic.jpg'
+                style="width:50px; height:50px"/>
+                {% endif %}
+            </h5>
+            <p class="card-text">
+                {{ post_to_view.comments | linebreaksbr }}
+            </p>
+                {% if post_to_view.owner_profile %}
+                    <div class="card-text">
+                         <small class="text-muted col-md-4" >
+                        Written By: <a href="{% url 'users:user_profile' post_to_view.owner.id %}">{{ post_to_view.owner.username }}
+                        </a> on {{ post_to_view.date_of_entry | date:'M d, Y'}}
+                        </small>
+                        <small class="col-md-6 offset-md-6">
+                             {% if request.user.id == post_to_view.owner_profile.user.id %}
+                            <a href="{% url 'pts_pops_app:remove_post' post_to_view.id %}" class="btn btn-danger">Remove Post</a>
+                            <a href="{% url 'pts_pops_app:edit_post' post_to_view.id %}" class="btn btn-warning">Edit Post</a>
+                            {% endif %}
+                        </small>
+                    </div>
+              {% else %}
+                    <p class="card-text">
+                        <small class="text-muted" >
+                            Written By: Anonymous on {{ post_to_view.date_of_entry | date:'M d, Y'}}
+                        </small>
+                    </p>
+              {% endif %}
+          </div>
+        </div>
+    {% else %}
+        <div class="card text-center mx-auto" style="max-width: 760px; margin-bottom:15px;">
+         {% if post_to_view.owner_profile %}
+              <div class="card-header">
+                <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/{{ post_to_view.owner_profile.user_photo }}'
+                        style="width:50px; height:50px" alt="profile-picture"/>
+              </div>
+         {% else %}
+             <div class="card-header">
+                <img class="card-title" src='{{ AWS_BUCKET_BASEURL }}/default_profile_pic.jpg'
+                        style="width:50px; height:50px" alt="profile-picture"/>
+              </div>
+         {% endif %}
+          <div class="card-body">
+            <p class="card-text">
+                {{ post_to_view.comments | linebreaksbr }}
+            </p>
+          </div>
+         {% if post_to_view.owner_profile %}
+          <div class="card-footer text-muted">
+              <div class="ml-auto">
+                 Written By: <a href="{% url 'users:user_profile' post_to_view.owner.id %}">{{ post_to_view.owner.username }}</a>
+                 on {{ post_to_view.date_of_entry | date:'M d, Y'}}
+              </div>
+              <div class="mr-auto">
+                  {% if request.user.id == post_to_view.owner_profile.user.id %}
+                    <a href="{% url 'pts_pops_app:remove_post' post_to_view.id %}" class="btn btn-danger">Remove Post</a>
+                    <a href="{% url 'pts_pops_app:edit_post' post_to_view.id %}" class="btn btn-warning">Edit Post</a>
+                 {% endif %}
+              </div>
+          </div>
+         {% else %}
+              <div class="card-footer text-muted">
+                  Written By Anonymous on {{ post_to_view.date_of_entry | date:'M d, Y'}}
+              </div>
+         {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

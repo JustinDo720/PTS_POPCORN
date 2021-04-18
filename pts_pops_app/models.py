@@ -44,3 +44,25 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f'{self.opinions}'
+
+
+# Popcorn Vote
+class Question(models.Model):
+    question = models.CharField(max_length=200)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question
+
+
+# Popcorn Choices
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    # Do not put null=True bc it will leave it completely blank even if you upload something form the website
+    choice_photo = models.ImageField(blank=True, null=True, default=None, upload_to=f'{AWS_BUCKET_BASEURL}/choice_img/')
+    choice_post_date = models.DateTimeField(auto_now_add=True)
+    votes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.choice_text}: {int(self.votes)}'

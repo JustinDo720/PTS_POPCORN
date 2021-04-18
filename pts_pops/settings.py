@@ -142,6 +142,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Media file for images
 MEDIA_URL = '/media/'
+# This is the problem!!!! we have pts_pops NOT pts_pops_app which is our media file that messes up things check out soon
 MEDIA_ROOT = os.path.join(BASE_DIR, 'pts_pops/media')
 
 # AWS S3 BUCKET

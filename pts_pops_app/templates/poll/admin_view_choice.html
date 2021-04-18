@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block title %}
+    <title>
+        View Choices
+    </title>
+{% endblock %}
+
+{% block content %}
+    </div>
+         <div class="card text-white mb-3 mx-auto" style="max-width: 40rem; background-color: #a50527; margin-top:100px;">
+          <div class="card-header mx-auto">
+              <img src="{% static 'img/pts1.png' %}" class='rounded-3 rounded img-thumbnail' alt="pts-logo"
+              style="width:75px; height:75px;"> PTS POPCORN!
+          </div>
+          <div class="card-body">
+            <h5 class="card-title" style="text-align:center">View Choice Submitted</h5>
+                <div>
+                    {% for choice in all_choices %}
+                    {% if choice.choice_photo %}
+                        <img src="{{ AWS_BUCKET_BASEURL }}/{{ choice.choice_photo }}" alt="choice-photo"/>
+                            {{ choice }}
+                        {% else %}
+                        <h4>
+                            {{ choice }}
+                        </h4>
+                    {% endif %}
+                {% endfor %}
+                </div>
+                <div>
+                     <a class="btn btn-primary" href="{% url 'pts_pops_app:admin_add_choice'  %}">
+                        Add Another Choice
+                    </a>
+                </div>
+          </div>
+    </div>
+{% endblock %}
