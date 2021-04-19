@@ -10,7 +10,7 @@
 
 <form action="{% url 'pts_pops_app:voteMechanism' question_requested.id %}" method="post">
 	{% csrf_token %}
-        <div class="card text-center mx-auto" style="width:45rem; margin-top:15px;">
+        <div class="card text-center mx-auto" style="max-width:45rem; margin-top:15px;">
           <div class="card-header">
             PTSP - Vote!!
           </div>

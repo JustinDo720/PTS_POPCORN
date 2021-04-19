@@ -231,3 +231,8 @@ def results(request, question_id):
 
     return render(request, 'poll/results.html', context)
 
+
+# Show homepage for user to choose which poll to look at (result wise)
+def results_homepage(request):
+    all_questions = Question.objects.all()
+    return render(request, 'poll/results_homepage.html', {'all_questions': all_questions})

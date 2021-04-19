@@ -96,12 +96,26 @@
                             <small class="text-muted" >
                                 Written By: <a href="{% url 'users:user_profile' post.owner.id %}">{{ post.owner.username }}
                             </a> on {{ post.date_of_entry | date:'M d, Y'}}
+                                  {% if post.comments|length <= 300 %}
+                                      <a href="{% url 'pts_pops_app:view_full_post' post.id %}"
+                                         class="btn btn-primary btn-sm offset-md-3"
+                                         >
+                                          View Larger Post
+                                      </a>
+                                  {% endif %}
                             </small>
                         </p>
                       {% else %}
                           <p class="card-text">
                             <small class="text-muted" >
                                 Written By: Anonymous on {{ post.date_of_entry | date:'M d, Y'}}
+                                  {% if post.comments|length <= 300 %}
+                                      <a href="{% url 'pts_pops_app:view_full_post' post.id %}"
+                                         class="btn btn-primary btn-sm offset-md-3"
+                                         >
+                                          View Larger Post
+                                      </a>
+                                  {% endif %}
                             </small>
                         </p>
                       {% endif %}
@@ -131,13 +145,27 @@
                     </p>
                   </div>
                  {% if post.owner_profile %}
-                  <div class="card-footer text-muted">
+                  <div class="card-footer text-muted" style="text-align:center">
                       Written By: <a href="{% url 'users:user_profile' post.owner.id %}">{{ post.owner.username }}</a>
                       on {{ post.date_of_entry | date:'M d, Y'}}
+                      {% if post.comments|length <= 300 %}
+                          <a href="{% url 'pts_pops_app:view_full_post' post.id %}"
+                             class="btn btn-primary col-md-3 offset-md-3"
+                             >
+                              View Larger Post
+                          </a>
+                      {% endif %}
                   </div>
                  {% else %}
                       <div class="card-footer text-muted">
                       Written By Anonymous on {{ post.date_of_entry | date:'M d, Y'}}
+                      {% if post.comments|length <= 300 %}
+                          <a href="{% url 'pts_pops_app:view_full_post' post.id %}"
+                             class="btn btn-primary col-md-3 offset-md-3"
+                             >
+                              View Larger Post
+                          </a>
+                      {% endif %}
                       </div>
                  {% endif %}
                 </div>

@@ -16,5 +16,6 @@ urlpatterns = [
     path('vote_homepage/', views.vote_homepage, name='vote_homepage'),
     path('show_question/<int:question_id>', views.show_question, name='show_question'),
     path('voteMechanism/<int:question_id>', views.voteMechanism, name='voteMechanism'),
-    path('results/<int:question_id>', views.results, name='results')
+    path('results/<int:question_id>', views.results, name='results'),
+    path('results_homepage/', views.results_homepage, name='results_homepage')
 ]

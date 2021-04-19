@@ -27,6 +27,12 @@
                         <span>
                            Written on {{ post.date_of_entry | date:'M d, Y' }}
                         </span>
+                        {% if post.comments|length <= 300 %}
+                            <a href="{% url 'pts_pops_app:view_full_post' post.id %}"
+                               class="btn btn-info">
+                                View Full Post
+                            </a>
+                        {% endif %}
                         {% if request.user.id == post.owner_profile.user.id %}
                             <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
                             <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
@@ -97,14 +103,24 @@
                                     Written on {{ post.date_of_entry | date:'M d, Y'}}
                                 </small>
                             </p>
-                            {% if request.user.id == post.owner_profile.user.id %}
-                            <p class="card-text col-md-12 text-center">
+                          <p class="card-text col-md-12 text-center">
                                 <small class="text-muted">
-                                    <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">Remove Post</a>
-                                    <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">Edit Post</a>
+                                    {% if post.comments|length <= 300 %}
+                                    <a href="{% url 'pts_pops_app:view_full_post' post.id %}"
+                                       class="btn btn-info">
+                                        View Full Post
+                                    </a>
+                                    {% endif %}
+                                    {% if request.user.id == post.owner_profile.user.id %}
+                                        <a href="{% url 'pts_pops_app:remove_post' post.id %}" class="btn btn-danger">
+                                            Remove Post
+                                        </a>
+                                        <a href="{% url 'pts_pops_app:edit_post' post.id %}" class="btn btn-warning">
+                                            Edit Post
+                                        </a>
+                                    {% endif %}
                                 </small>
                             </p>
-                            {% endif %}
                           </div>
                         </div>
                       </div>
