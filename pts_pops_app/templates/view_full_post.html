@@ -10,7 +10,8 @@
 {% block content %}
     {% if post_to_view.picture %}
         <div class="card mb-3 mx-auto mt-5" style="max-width: 70rem; max-height: 70rem;">
-          <img src="{{ AWS_BUCKET_BASEURL }}/{{ post_to_view.picture }}" class="card-img-top" alt="post-photo">
+          <img src="{{ AWS_BUCKET_BASEURL }}/{{ post_to_view.picture }}" class="card-img-top mx-auto" alt="post-photo"
+                style="max-width: 900px; max-height: 900px;">
           <div class="card-body">
             <h5 class="card-title">
                 {% if post_to_view.owner_profile %}
